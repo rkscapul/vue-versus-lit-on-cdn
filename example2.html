@@ -1,0 +1,62 @@
+<script type="module">
+import {LitElement, html} from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js';
+
+class WorkplaceImpressions extends LitElement {
+
+  static properties = {
+    company: { type: String }
+  }
+
+  constructor() {
+    super();
+
+    this.company = 'Dunder Mifflin Scranton';
+    this._companies = [
+      'Dunder Mifflin Scranton',
+      '99th Precinct, NYPD',
+      'Duff Beer',
+      'Stark Industries',
+      'Wayne Enterprises'
+    ];
+  }
+
+  render() {
+    return html`
+      ${this._renderSelection()}
+      <h1>${this.company} - ${this._renderFirstImpressions(this.company)}</h1>
+    `;
+  }
+
+  _renderSelection = () => {
+    return html`
+      <select @change=${this._changeQuote}>
+        ${this._companies.map(comp => html`<option>${comp}</option`)}
+      </select>
+    `;
+  }
+
+  _renderFirstImpressions(company) {
+    switch(company) {
+      case 'Dunder Mifflin Scranton':
+        return 'They sell paper, with a bit of insanity from the upper management. 10/10 would recommend.';
+      case '99th Precinct, NYPD':
+        return 'Innovative division, caught a criminal by letting them sing Backstreet Boys. 10/10 as long as you\'re not the criminal.';
+      case 'Duff Beer':
+        return 'Don\'t get drunk. 5/10'
+      case 'Stark Industries':
+        return 'Tesla, but more cool and less Dodge. 100/10'
+      case 'Wayne Enterprises':
+        return 'Tesla'
+      
+    }
+  }
+
+  _changeQuote(e) {
+    this.company = e.target.value;
+  }
+}
+
+window.customElements.define('workplace-impressions', WorkplaceImpressions);
+</script>  
+
+<workplace-impressions></workplace-impressions>

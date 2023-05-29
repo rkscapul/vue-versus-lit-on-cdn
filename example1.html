@@ -1,0 +1,51 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <select v-model="company" @change="setCompany($event)">
+    <option v-for="comp in companies" :key="comp" :value="comp">{{ comp }}</option>
+  </select>
+
+  <h1>{{company}} - {{getFirstImpressions(company)}}</h1>
+</div>
+
+<script>
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        message: 'Hello Vue!',
+        company: 'Dunder Mifflin Scranton',
+        companies: [
+          'Dunder Mifflin Scranton',
+          '99th Precinct, NYPD',
+          'Duff Beer',
+          'Stark Industries',
+          'Wayne Enterprises'
+        ]
+      }
+    },
+    computed() {
+      console.log(this.companies);
+    },
+    methods: {
+      getFirstImpressions(company) {
+        switch(company) {
+          case 'Dunder Mifflin Scranton':
+            return 'They sell paper, with a bit of insanity from the upper management. 10/10 would recommend.';
+          case '99th Precinct, NYPD':
+            return 'Innovative division, caught a criminal by letting them sing Backstreet Boys. 10/10 as long as you\'re not the criminal.';
+          case 'Duff Beer':
+            return 'Don\'t get drunk. 5/10'
+          case 'Stark Industries':
+            return 'Tesla, but more cool and less Dodge. 100/10'
+          case 'Wayne Enterprises':
+            return 'Tesla'  
+        }
+      },
+      setCompany(e) {
+        console.log(this.company)
+      }
+    }
+  }).mount('#app')
+</script>
